@@ -49,14 +49,14 @@ const ITEM_TYPE_COLUMN  = "type";
 
 const ITEM_TYPES_SUB_TYPE_COLUMN = "Equiv1";
 
-const TREASURE_CLASS_EX_FILENAME = 'global\\excel\\treasureClassEx.txt';
-const WEAPONS_FILENAME           = 'global\\excel\\weapons.txt';
-const ARMOR_FILENAME             = 'global\\excel\\armor.txt';
-const ITEM_TYPES_FILENAME        = 'global\\excel\\itemtypes.txt';
-const MISC_FILENAME              = 'global\\excel\\misc.txt';
-const UNIQUE_ITEMS_FILENAME      = 'global\\excel\\uniqueitems.txt';
-const SET_ITEMS_FILENAME         = 'global\\excel\\setitems.txt';
-const ITEM_NAMES_FILENAME        = 'local\\lng\\strings\\item-names.json';
+const TREASURE_CLASS_EX_FILENAME = "global\\excel\\treasureClassEx.txt";
+const WEAPONS_FILENAME           = "global\\excel\\weapons.txt";
+const ARMOR_FILENAME             = "global\\excel\\armor.txt";
+const ITEM_TYPES_FILENAME        = "global\\excel\\itemtypes.txt";
+const MISC_FILENAME              = "global\\excel\\misc.txt";
+const UNIQUE_ITEMS_FILENAME      = "global\\excel\\uniqueitems.txt";
+const SET_ITEMS_FILENAME         = "global\\excel\\setitems.txt";
+const ITEM_NAMES_FILENAME        = "local\\lng\\strings\\item-names.json";
 
 const TREASURE_CLASS_EX_FILE = D2RMM.readTsv(TREASURE_CLASS_EX_FILENAME);
 const ITEM_TYPES_FILE        = D2RMM.readTsv(ITEM_TYPES_FILENAME);
