@@ -199,7 +199,7 @@ function handleItems(itemType, itemSubType) {
 			if (isEmptyTc(itemType, itemSubType, currTcNumber)) {
 				continue;
 			}
-			throw "No items with type rarity 1,2 or 3 found for itemType = " + itemType + "; itemSubType = " + itemSubType + "; tc " + currTcNumber + "!";
+			throw `No items with type rarity 1, 2 or 3 found for itemType = ${itemType}; itemSubType = ${itemSubType}; tc ${currTcNumber}!`;
 		}
 
 		const rarity1TCs = generateTcRows(itemsRarity1, currTcNumber, tcNamePrefix, RARITY1);
@@ -274,7 +274,7 @@ function getTcNamePrefix(itemType, itemSubType) {
 		return TC_NAME_ARMOR_PREFIX;
 	}
 
-	throw "Given item type: " + itemType + " is not a known type!";
+	throw `Given item type: ${itemType} is not a known type!`;
 }
 
 function getItems(itemType, treasureClassNumber) {
@@ -303,7 +303,7 @@ function getItemFile(itemType) {
 		return WEAPONS_FILE;
 	}
 
-	throw "Given item type: " + itemType + " is not a known type!";
+	throw `Given item type: ${itemType} is not a known type!`;
 }
 
 function getItemTypeRarity(itemeCode) {
@@ -347,7 +347,7 @@ function generateTcRows(items, treasureClassNumber, tcNamePrefix, rarityNumber, 
 		if (items.length > 20) {
 			let s = "";
 			items.forEach(item => s += item.code + "; ");
-			throw "More than 20 items for treasureClassNumber = " + treasureClassNumber + "; rarityNumber = " + rarityNumber + "; tcNamePrefix = " + tcNamePrefix + "; newTcName = " + newTcName + "! The items are " + s + "!";
+			throw `More than 20 items for treasureClassNumber = ${treasureClassNumber}; rarityNumber = ${rarityNumber}; tcNamePrefix = ${tcNamePrefix}; newTcName = ${newTcName}! The items are ${s}!`;
 		}
 
 		const firstTenItems = items.slice(0, TC_MAX_ITEMS);
