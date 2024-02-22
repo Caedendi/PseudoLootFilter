@@ -49,23 +49,20 @@ const ITEM_TYPE_COLUMN  = "type";
 
 const ITEM_TYPES_SUB_TYPE_COLUMN = "Equiv1";
 
-const TREASURE_CLASS_EX_FILENAME = "global\\excel\\treasureClassEx.txt";
-const WEAPONS_FILENAME           = "global\\excel\\weapons.txt";
-const ARMOR_FILENAME             = "global\\excel\\armor.txt";
-const ITEM_TYPES_FILENAME        = "global\\excel\\itemtypes.txt";
-const MISC_FILENAME              = "global\\excel\\misc.txt";
-const UNIQUE_ITEMS_FILENAME      = "global\\excel\\uniqueitems.txt";
-const SET_ITEMS_FILENAME         = "global\\excel\\setitems.txt";
-const ITEM_NAMES_FILENAME        = "local\\lng\\strings\\item-names.json";
+const TREASURE_CLASS_EX_FILE_NAME = "global\\excel\\treasureClassEx.txt";
+const WEAPONS_FILE_NAME           = "global\\excel\\weapons.txt";
+const ARMOR_FILE_NAME             = "global\\excel\\armor.txt";
+const ITEM_TYPES_FILE_NAME        = "global\\excel\\itemtypes.txt";
+const MISC_FILE_NAME              = "global\\excel\\misc.txt";
+const UNIQUE_ITEMS_FILE_NAME      = "global\\excel\\uniqueitems.txt";
+const SET_ITEMS_FILE_NAME         = "global\\excel\\setitems.txt";
+const ITEM_NAMES_FILE_NAME        = "local\\lng\\strings\\item-names.json";
 
-const TREASURE_CLASS_EX_FILE = D2RMM.readTsv(TREASURE_CLASS_EX_FILENAME);
-const ITEM_TYPES_FILE        = D2RMM.readTsv(ITEM_TYPES_FILENAME);
-const WEAPONS_FILE           = D2RMM.readTsv(WEAPONS_FILENAME);
-const ARMOR_FILE             = D2RMM.readTsv(ARMOR_FILENAME);
-const MISC_FILE              = D2RMM.readTsv(MISC_FILENAME);
-const UNIQUE_ITEMS_FILE      = D2RMM.readTsv(UNIQUE_ITEMS_FILENAME);
-const SET_ITEMS_FILE         = D2RMM.readTsv(SET_ITEMS_FILENAME);
-const ITEM_NAMES_FILE        = D2RMM.readJson(ITEM_NAMES_FILENAME);
+const TREASURE_CLASS_EX_FILE = D2RMM.readTsv(TREASURE_CLASS_EX_FILE_NAME);
+const ITEM_TYPES_FILE        = D2RMM.readTsv(ITEM_TYPES_FILE_NAME);
+const WEAPONS_FILE           = D2RMM.readTsv(WEAPONS_FILE_NAME);
+const ARMOR_FILE             = D2RMM.readTsv(ARMOR_FILE_NAME);
+const MISC_FILE              = D2RMM.readTsv(MISC_FILE_NAME);
 
 const LOG_ENABLED = false;
 let logIndex = 1;
@@ -82,17 +79,17 @@ handleItems(ITEM_TYPE_WEAPON);
 handleItems(ITEM_TYPE_WEAPON, ITEM_SUB_TYPE_WEAPON_MELEE);
 handleItems(ITEM_TYPE_WEAPON, ITEM_SUB_TYPE_WEAPON_MISSILE);
 
-D2RMM.writeTsv(TREASURE_CLASS_EX_FILENAME, TREASURE_CLASS_EX_FILE);
+D2RMM.writeTsv(TREASURE_CLASS_EX_FILE_NAME, TREASURE_CLASS_EX_FILE);
 
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Gems Functions ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 function handleGems() {
-	const gemTreasureClasses = TREASURE_CLASS_EX_FILE.rows.filter((row) => isGemTc(row));
+	const gemTreasureClasses = TREASURE_CLASS_EX_FILE.rows.filter(row => isGemTc(row));
 
 	ITEM_TYPES_FILE.rows
-		.filter((currItemTypeRow) => isGemQualityItemType(currItemTypeRow))
+		.filter(currItemTypeRow => isGemQualityItemType(currItemTypeRow))
 		.forEach(currItemTypeRow => {
 			if (config[currItemTypeRow.Code] === true) {
 				gemTreasureClasses.forEach(row => {
@@ -116,7 +113,7 @@ function isGemQualityItemType(itemType) {
 ///////////////////////////////////////////////////////////////////////////////
 
 function handleRunes() {
-	const runeTreasureClasses = TREASURE_CLASS_EX_FILE.rows.filter((row) => isRuneTc(row));
+	const runeTreasureClasses = TREASURE_CLASS_EX_FILE.rows.filter(row => isRuneTc(row));
 
 	MISC_FILE.rows
 		.filter(row => isRuneItemType(row))
@@ -153,7 +150,7 @@ function handleMiscItems() {
 		});
 
 	WEAPONS_FILE.rows
-		.filter((currWeaponRow) => isMiscWeaponType(currWeaponRow))
+		.filter(currWeaponRow => isMiscWeaponType(currWeaponRow))
 		.forEach(currWeaponRow => {
 			if (config[currWeaponRow.code] === true) {
 				TREASURE_CLASS_EX_FILE.rows.forEach(row => {
@@ -278,7 +275,7 @@ function getTcNamePrefix(itemType, itemSubType) {
 }
 
 function getItems(itemType, treasureClassNumber) {
-	const selectedItems = getItemFile(itemType).rows.filter((row) => treasureClassNumber - TC_SIZE < row.level && row.level <= treasureClassNumber);
+	const selectedItems = getItemFile(itemType).rows.filter(row => treasureClassNumber - TC_SIZE < row.level && row.level <= treasureClassNumber);
 
 	const enrichedItems = selectedItems.map(item => ({
 		category: itemType,
@@ -307,7 +304,7 @@ function getItemFile(itemType) {
 }
 
 function getItemTypeRarity(itemeCode) {
-	return ITEM_TYPES_FILE.rows.find((row) => row.Code === itemeCode).Rarity;
+	return ITEM_TYPES_FILE.rows.find(row => row.Code === itemeCode).Rarity;
 }
 
 function getWeaponSubType(weaponTypeCode) {
@@ -319,7 +316,7 @@ function getWeaponSubType(weaponTypeCode) {
 		return weaponTypeCode;
 	}
 
-	const weaponType = ITEM_TYPES_FILE.rows.find((row) => row.Code === weaponTypeCode);
+	const weaponType = ITEM_TYPES_FILE.rows.find(row => row.Code === weaponTypeCode);
 	const weaponSubTypeCode = weaponType[ITEM_TYPES_SUB_TYPE_COLUMN];
 
 	return getWeaponSubType(weaponSubTypeCode);
